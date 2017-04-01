@@ -20,6 +20,9 @@ xcuserdata/
 ## Other
 *.moved-aside
 *.xcuserstate
+.DS_Store
+*.bin
+*.hex
 
 ## Obj-C/Swift specific
 *.hmap
