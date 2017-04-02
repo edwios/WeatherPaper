@@ -163,24 +163,24 @@ void callback(char* topic, byte* payload, unsigned int length) {
     m = String(p);
     if (tp.endsWith(TP_LIVTEMP)) {
         // Living room temperature
-        m = String(abs(m.toFloat()+0.5));
+        m = String(round(m.toFloat()+0.5));
         m.concat("C");
         livtemp = m;
     } else if (tp.endsWith(TP_LIVHUMI)) {
         // Living room temperature
-        m = String(abs(m.toFloat()+0.5));
+        m = String(round(m.toFloat()+0.5));
         m.concat("%");
         livhumi = m;
     } else if (tp.endsWith(TP_LIVAQI)) {
         livaqi = m;
     } else if (tp.endsWith(TP_BALHUMI)) {
         // Balcony temperature
-        m = String(abs(m.toFloat()+0.5));
+        m = String(round(m.toFloat()+0.5));
         m.concat("%rH");
         balhumi = m;
     } else if (tp.endsWith(TP_BALTEMP)) {
         // Baconly temperature
-        m = String(abs(m.toFloat()+0.5));
+        m = String(round(m.toFloat()+0.5));
         m.concat("C");
         baltemp = m;
     } else if (tp.endsWith(TP_BALAQI)) {
@@ -251,41 +251,41 @@ void sendToLCD(uint8_t type,String index, String cmd)
     uint16_t x=0, y=0;
     uint8_t s = ASCII64;
     
-	if (type == LCD_TEXT ){
-	    if (index.equals(INDOORTEMPFIELD)) {
+    if (type == LCD_TEXT ){
+        if (index.equals(INDOORTEMPFIELD)) {
             x = INDOORTEMP_X; y = INDOORTEMP_Y;
-	    } else if (index.equals(INDOORHUMIFIELD)) {
+        } else if (index.equals(INDOORHUMIFIELD)) {
             x = INDOORHUMI_X; y = INDOORHUMI_Y;
-	    } else if (index.equals(OUTDOORHUMIFIELD)) {
+        } else if (index.equals(OUTDOORHUMIFIELD)) {
             x = OUTDOORHUMI_X; y = OUTDOORHUMI_Y;
-	    } else if (index.equals(OUTDOORTEMPFIELD)) {
-	        x = OUTDOORTEMP_X; y = OUTDOORTEMP_Y;
-	    } else if (index.equals(INDOORAQIFIELD)) {
-	        x = INDOORAQI_X; y = INDOORAQI_Y;
-	    } else if (index.equals(OUTDOORAQIFIELD)) {
-	        x = OUTDOORAQI_X; y = OUTDOORAQI_Y;
-	    } else if (index.equals(STATUSFIELD)) {
-	        s = ASCII32;
-	        x = STATUS_X; y = STATUS_Y;
-	    } else if (index.equals(ALARMFIELD)) {
-	        s = ASCII48;
-	        x = ALARM_X; y = ALARM_Y;
-	    } else if (index.equals(CLOCKFIELD)) {
-	        x = CLOCK_X; y = CLOCK_Y;
-	    } else if (index.equals(DATEFIELD)) {
-	        x = DATE_X; y = DATE_Y;
-	    }
-	    draw_text(cmd, x, y, s);
-	}
-	else if (type == LCD_VALUE){
-	}
-	else if (type == LCD_PICT){
-	}
-	else if (type == LCD_PAGESELECT ){
-	} else if (type == LCD_FONTCOLOR){
-	} else if (type == LCD_DIRECT){         // 99 pass over the command
-	}
-	
+        } else if (index.equals(OUTDOORTEMPFIELD)) {
+            x = OUTDOORTEMP_X; y = OUTDOORTEMP_Y;
+        } else if (index.equals(INDOORAQIFIELD)) {
+            x = INDOORAQI_X; y = INDOORAQI_Y;
+        } else if (index.equals(OUTDOORAQIFIELD)) {
+            x = OUTDOORAQI_X; y = OUTDOORAQI_Y;
+        } else if (index.equals(STATUSFIELD)) {
+            s = ASCII32;
+            x = STATUS_X; y = STATUS_Y;
+        } else if (index.equals(ALARMFIELD)) {
+            s = ASCII48;
+            x = ALARM_X; y = ALARM_Y;
+        } else if (index.equals(CLOCKFIELD)) {
+            x = CLOCK_X; y = CLOCK_Y;
+        } else if (index.equals(DATEFIELD)) {
+            x = DATE_X; y = DATE_Y;
+        }
+        draw_text(cmd, x, y, s);
+    }
+    else if (type == LCD_VALUE){
+    }
+    else if (type == LCD_PICT){
+    }
+    else if (type == LCD_PAGESELECT ){
+    } else if (type == LCD_FONTCOLOR){
+    } else if (type == LCD_DIRECT){         // 99 pass over the command
+    }
+    
 }
 
 void lcdOn() {
@@ -492,5 +492,4 @@ void loop()
     }
 
 }
-
 
